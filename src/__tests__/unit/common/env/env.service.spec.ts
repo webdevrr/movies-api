@@ -30,7 +30,7 @@ describe('EnvService', () => {
   });
 
   it('should return the correct value when get is called', () => {
-    const key = 'DATABASE_URL';
+    const key = 'PORT';
     const value = 'TEST_VALUE';
     jest.spyOn(configService, 'get').mockReturnValue(value);
 

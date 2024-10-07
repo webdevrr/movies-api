@@ -1,6 +1,7 @@
-import { Controller, Post } from '@nestjs/common';
+import { Body, Controller, Post } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 
+import { CreateMovieDto } from '@/apps/movies/domain/dtos';
 import { CreateMovieUseCase } from '@/apps/movies/use-cases';
 
 @ApiTags('movies')
@@ -9,7 +10,7 @@ export class MoviesController {
   constructor(private readonly createMovieUseCase: CreateMovieUseCase) {}
 
   @Post()
-  create() {
-    return this.createMovieUseCase.execute();
+  create(@Body() createMovieDto: CreateMovieDto) {
+    return this.createMovieUseCase.execute(createMovieDto);
   }
 }
