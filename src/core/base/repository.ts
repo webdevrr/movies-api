@@ -1,4 +1,5 @@
 import { Entity } from './entity';
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-export abstract class Repository<TEntity extends Entity> {}
+export abstract class Repository<TEntity extends Entity> {
+  abstract create(entity: TEntity): void;
+}

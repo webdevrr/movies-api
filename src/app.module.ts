@@ -3,6 +3,7 @@ import { ConfigModule } from '@nestjs/config';
 import { APP_FILTER, APP_INTERCEPTOR } from '@nestjs/core';
 
 import { HealthController } from './apps/health';
+import { MoviesModule } from './apps/movies';
 import { EnvModule, envSchema } from './common/env';
 import { CustomHttpExceptionFilter, ValidationExceptionFilter } from './common/filters';
 import { CorrelationIdInterceptor, LoggingInterceptor } from './common/interceptors';
@@ -16,7 +17,8 @@ import { Logger } from './common/logger/logger.service';
       isGlobal: true,
       ignoreEnvFile: process.env.NODE_ENV === 'test'
     }),
-    EnvModule
+    EnvModule,
+    MoviesModule
   ],
   providers: [
     Logger,

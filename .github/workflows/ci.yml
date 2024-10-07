@@ -3,7 +3,7 @@ name: Checks
 on:
   push:
     branches:
-      - main
+      - master
   pull_request:
     branches:
       - '*'
@@ -98,7 +98,6 @@ jobs:
 
       - name: Run tests and collect coverage
         run: npm run test:e2e:cov
-
 
   # docker:
   #   runs-on: ubuntu-latest
