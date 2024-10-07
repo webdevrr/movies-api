@@ -20,7 +20,7 @@ async function bootstrap() {
 
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document);
-  app.useGlobalPipes(new ValidationPipe());
+  app.useGlobalPipes(new ValidationPipe({ transform: true }));
   logger.log(`Swagger is running on <http://localhost>:${port}/api`, 'Bootstrap');
 
   await app.listen(port).then(() => logger.log(`Listening on port ${port}`, 'Bootstrap'));

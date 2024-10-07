@@ -1,10 +1,19 @@
-import { IsArray, IsEnum, IsNumber, IsOptional, IsString, Length } from 'class-validator';
+import {
+  ArrayUnique,
+  IsArray,
+  IsEnum,
+  IsNumber,
+  IsOptional,
+  IsString,
+  Length
+} from 'class-validator';
 
 import { Genre } from '../../types';
 
 export class CreateMovieDto {
   @IsArray()
   @IsEnum(Genre, { each: true })
+  @ArrayUnique()
   readonly genres: Genre[];
 
   @IsString()
