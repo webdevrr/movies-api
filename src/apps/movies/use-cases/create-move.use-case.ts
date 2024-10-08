@@ -15,7 +15,7 @@ export class CreateMovieUseCase implements UseCase<void> {
     const movie = new MovieEntity(
       title,
       genres,
-      year,
+      String(year),
       String(runtime),
       director,
       actors,

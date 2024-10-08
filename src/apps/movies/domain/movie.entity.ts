@@ -1,11 +1,9 @@
 import { Entity } from '@/core/base';
 
-import { Genre } from '../types';
-
 export class MovieEntity extends Entity {
-  private _genres: Genre[];
+  private _genres: string[];
   private _title: string;
-  private _year: number;
+  private _year: string;
   private _runtime: string;
   private _director: string;
   private _actors?: string;
@@ -14,8 +12,8 @@ export class MovieEntity extends Entity {
 
   constructor(
     title: string,
-    genres: Genre[],
-    year: number,
+    genres: string[],
+    year: string,
     runtime: string,
     director: string,
     actors?: string,
@@ -35,7 +33,7 @@ export class MovieEntity extends Entity {
     this.id = id;
   }
 
-  set genres(value: Genre[]) {
+  set genres(value: string[]) {
     this._genres = value;
   }
 
@@ -51,7 +49,7 @@ export class MovieEntity extends Entity {
     return this._title;
   }
 
-  set year(value: number) {
+  set year(value: string) {
     this._year = value;
   }
 

@@ -6,7 +6,6 @@ import { MovieRepository } from '../data-access/repository';
 import { MovieEntity } from '../domain';
 import { MovieDto } from '../domain/dtos';
 import { MovieMapper } from '../domain/mappers';
-import { Genre } from '../types';
 
 @Injectable()
 export class ListMoviesUseCase implements UseCase<MovieDto[] | []> {
@@ -16,7 +15,7 @@ export class ListMoviesUseCase implements UseCase<MovieDto[] | []> {
     this.movieMapper = new MovieMapper();
   }
 
-  public async execute(duration?: number, genres?: Genre[]): Promise<MovieDto[] | []> {
+  public async execute(duration?: number, genres?: string[]): Promise<MovieDto[] | []> {
     const moviesData = await this.movieRepository.list(duration, genres);
     let movies: MovieEntity[] | [];
 
@@ -49,7 +48,7 @@ export class ListMoviesUseCase implements UseCase<MovieDto[] | []> {
     return movies.length === 0 ? [] : movies.map(this.movieMapper.toDto);
   }
 
-  private filterMoviesByGenres(movies: MovieEntity[], genres: Genre[]) {
+  private filterMoviesByGenres(movies: MovieEntity[], genres: string[]) {
     const filteredMovies = movies.filter(movie =>
       movie.genres.some(genre => genres.includes(genre))
     );

@@ -1,7 +1,5 @@
 import { Transform } from 'class-transformer';
-import { IsEnum, IsNumber, IsOptional } from 'class-validator';
-
-import { Genre } from '../../types';
+import { IsNumber, IsOptional, IsString } from 'class-validator';
 
 export class MoviesListDto {
   @IsOptional()
@@ -10,6 +8,6 @@ export class MoviesListDto {
   readonly duration: number;
 
   @IsOptional()
-  @IsEnum(Genre, { each: true })
-  readonly genres: Genre[];
+  @IsString({ each: true })
+  readonly genres: string[];
 }

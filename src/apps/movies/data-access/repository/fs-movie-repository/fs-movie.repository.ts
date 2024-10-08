@@ -1,7 +1,7 @@
 import { readFile, writeFile } from 'node:fs/promises';
 
 import { MovieEntity } from '@/apps/movies/domain';
-import { Genre, Movie } from '@/apps/movies/types';
+import { Movie } from '@/apps/movies/types';
 
 import { MovieRepository } from '../movie.repository';
 import { FsMovieMapper } from './mapper';
@@ -16,14 +16,14 @@ export class FsMovieRepository implements MovieRepository {
 
   async list(): Promise<MovieEntity[]> {
     const buffer = await readFile(this.DATA_PATH);
-    const { movies }: { genres: Genre[]; movies: Movie[] } = JSON.parse(buffer.toString());
+    const { movies }: { genres: string[]; movies: Movie[] } = JSON.parse(buffer.toString());
 
     return movies.map(this.fsMovieMapper.toEntity);
   }
 
   async create(entity: MovieEntity): Promise<void> {
     const buffer = await readFile(this.DATA_PATH);
-    const data: { genres: Genre[]; movies: Movie[] } = JSON.parse(buffer.toString());
+    const data: { genres: string[]; movies: Movie[] } = JSON.parse(buffer.toString());
 
     const lastMovieId = data.movies[data.movies.length - 1].id;
     entity.id = lastMovieId + 1;

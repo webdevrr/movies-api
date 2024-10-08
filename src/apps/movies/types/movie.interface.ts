@@ -1,11 +1,9 @@
-import { Genre } from './genre.enum';
-
 export interface Movie {
   id: number;
   title: string;
-  year: number;
+  year: string;
   runtime: string;
-  genres: Genre[];
+  genres: string[];
   director: string;
   actors?: string;
   plot?: string;

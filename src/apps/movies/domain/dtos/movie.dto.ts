@@ -1,11 +1,9 @@
-import { Genre } from '../../types';
-
 export class MovieDto {
   readonly id: number;
   readonly title: string;
-  readonly year: number;
+  readonly year: string;
   readonly runtime: string;
-  readonly genres: Genre[];
+  readonly genres: string[];
   readonly director: string;
   readonly actors?: string;
   readonly plot?: string;
