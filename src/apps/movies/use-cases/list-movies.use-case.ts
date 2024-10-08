@@ -19,6 +19,10 @@ export class ListMoviesUseCase implements UseCase<MovieDto[] | []> {
     const moviesData = await this.movieRepository.list(duration, genres);
     let movies: MovieEntity[] | [];
 
+    if (!duration && !genres) {
+      movies = this.getRandomMovie(moviesData);
+    }
+
     if (duration && !genres) {
       const moviesFilteredByDurationRange = this.filterMoviesByDurationRange(
         moviesData,
@@ -29,7 +33,7 @@ export class ListMoviesUseCase implements UseCase<MovieDto[] | []> {
     }
 
     if (!duration && genres) {
-      movies = this.filterMoviesByGenres(moviesData, genres);
+      movies = this.filterAndSortMoviesByGenres(moviesData, genres);
     }
 
     if (duration && genres) {
@@ -38,17 +42,13 @@ export class ListMoviesUseCase implements UseCase<MovieDto[] | []> {
         duration - 10,
         duration + 10
       );
-      movies = this.filterMoviesByGenres(moviesFilteredByDurationRange, genres);
-    }
-
-    if (!duration && !genres) {
-      movies = this.getRandomMovie(moviesData);
+      movies = this.filterAndSortMoviesByGenres(moviesFilteredByDurationRange, genres);
     }
 
     return movies.length === 0 ? [] : movies.map(this.movieMapper.toDto);
   }
 
-  private filterMoviesByGenres(movies: MovieEntity[], genres: string[]) {
+  private filterAndSortMoviesByGenres(movies: MovieEntity[], genres: string[]) {
     const filteredMovies = movies.filter(movie =>
       movie.genres.some(genre => genres.includes(genre))
     );

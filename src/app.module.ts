@@ -1,3 +1,4 @@
+import { CacheModule } from '@nestjs/cache-manager';
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { APP_FILTER, APP_INTERCEPTOR } from '@nestjs/core';
@@ -12,6 +13,7 @@ import { Logger } from './common/logger/logger.service';
 @Module({
   controllers: [HealthController],
   imports: [
+    CacheModule.register({ isGlobal: true }),
     ConfigModule.forRoot({
       validate: process.env.NODE_ENV !== 'test' ? env => envSchema.parse(env) : undefined,
       isGlobal: true,

@@ -1,5 +1,5 @@
 import { Body, Controller, Get, Post, Query } from '@nestjs/common';
-import { ApiQuery, ApiTags } from '@nestjs/swagger';
+import { ApiQuery, ApiResponse, ApiTags } from '@nestjs/swagger';
 
 import { CreateMovieDto, MovieDto, MoviesListDto } from '@/apps/movies/domain/dtos';
 import { CreateMovieUseCase, ListMoviesUseCase } from '@/apps/movies/use-cases';
@@ -20,6 +20,7 @@ export class MoviesController {
   @Get()
   @ApiQuery({ name: 'duration', required: false, type: Number })
   @ApiQuery({ name: 'genres', required: false, isArray: true, type: String })
+  @ApiResponse({ status: 200, type: [MovieDto] })
   list(@Query() moviesListDto: MoviesListDto): Promise<MovieDto[] | []> {
     const { genres, duration } = moviesListDto;
     return this.listMoviesUseCase.execute(duration, genres);

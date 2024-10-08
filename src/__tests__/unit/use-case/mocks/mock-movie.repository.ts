@@ -17,7 +17,7 @@ export class MockMovieRepository implements MovieRepository {
     return this.data.movies.map(this.fsMovieMapper.toEntity);
   }
 
-  async create(entity: MovieEntity): Promise<void> {
+  async create(entity: MovieEntity): Promise<number> {
     const lastMovieId =
       this.data.movies.length > 0 ? this.data.movies[this.data.movies.length - 1].id : 0;
     entity.id = lastMovieId + 1;
@@ -25,5 +25,11 @@ export class MockMovieRepository implements MovieRepository {
     const movie = this.fsMovieMapper.toPersistence(entity);
 
     this.data.movies.push(movie);
+
+    return entity.id;
+  }
+
+  async listGenres(): Promise<string[]> {
+    return this.data.genres;
   }
 }
