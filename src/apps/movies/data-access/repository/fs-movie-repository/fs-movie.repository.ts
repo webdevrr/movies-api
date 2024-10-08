@@ -7,7 +7,7 @@ import { MovieRepository } from '../movie.repository';
 import { FsMovieMapper } from './mapper';
 
 export class FsMovieRepository implements MovieRepository {
-  private readonly DATA_PATH = './db.json';
+  private readonly DATA_PATH = './db/db.json';
   private readonly fsMovieMapper: FsMovieMapper;
 
   constructor() {
