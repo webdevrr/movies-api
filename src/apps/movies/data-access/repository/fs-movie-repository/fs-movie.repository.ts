@@ -14,15 +14,9 @@ export class FsMovieRepository implements MovieRepository {
     this.fsMovieMapper = new FsMovieMapper();
   }
 
-  async list(duration?: number, genres?: Genre[]): Promise<MovieEntity[]> {
+  async list(): Promise<MovieEntity[]> {
     const buffer = await readFile(this.DATA_PATH);
     const { movies }: { genres: Genre[]; movies: Movie[] } = JSON.parse(buffer.toString());
-
-    if (duration) {
-    }
-
-    if (genres) {
-    }
 
     return movies.map(this.fsMovieMapper.toEntity);
   }

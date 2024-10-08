@@ -4,7 +4,7 @@ export class MovieDto {
   readonly id: number;
   readonly title: string;
   readonly year: number;
-  readonly runtime: number;
+  readonly runtime: string;
   readonly genres: Genre[];
   readonly director: string;
   readonly actors?: string;

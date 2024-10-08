@@ -12,7 +12,16 @@ export class CreateMovieUseCase implements UseCase<void> {
 
   public async execute(createMovieDto: CreateMovieDto): Promise<void> {
     const { title, genres, year, runtime, director, actors, plot, posterUrl } = createMovieDto;
-    const movie = new MovieEntity(title, genres, year, runtime, director, actors, plot, posterUrl);
+    const movie = new MovieEntity(
+      title,
+      genres,
+      year,
+      String(runtime),
+      director,
+      actors,
+      plot,
+      posterUrl
+    );
 
     return await this.movieRepository.create(movie);
   }

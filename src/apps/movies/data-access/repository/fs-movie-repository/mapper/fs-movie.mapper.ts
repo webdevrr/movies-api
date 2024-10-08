@@ -4,8 +4,8 @@ import { PersistenceMapper } from '@/core/base';
 
 export class FsMovieMapper extends PersistenceMapper<MovieEntity, Movie> {
   toEntity(param: Movie): MovieEntity {
-    const { title, genres, year, runtime, director, actors, plot, posterUrl } = param;
-    return new MovieEntity(title, genres, year, runtime, director, actors, plot, posterUrl);
+    const { title, genres, year, runtime, director, actors, plot, posterUrl, id } = param;
+    return new MovieEntity(title, genres, year, runtime, director, actors, plot, posterUrl, id);
   }
 
   toPersistence(entity: MovieEntity): Movie {

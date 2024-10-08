@@ -6,7 +6,7 @@ export class MovieEntity extends Entity {
   private _genres: Genre[];
   private _title: string;
   private _year: number;
-  private _runtime: number;
+  private _runtime: string;
   private _director: string;
   private _actors?: string;
   private _plot?: string;
@@ -16,11 +16,12 @@ export class MovieEntity extends Entity {
     title: string,
     genres: Genre[],
     year: number,
-    runtime: number,
+    runtime: string,
     director: string,
     actors?: string,
     plot?: string,
-    posterUrl?: string
+    posterUrl?: string,
+    id?: number
   ) {
     super();
     this.title = title;
@@ -31,6 +32,7 @@ export class MovieEntity extends Entity {
     this.actors = actors;
     this.plot = plot;
     this.posterUrl = posterUrl;
+    this.id = id;
   }
 
   set genres(value: Genre[]) {
@@ -57,7 +59,7 @@ export class MovieEntity extends Entity {
     return this._year;
   }
 
-  set runtime(value: number) {
+  set runtime(value: string) {
     this._runtime = value;
   }
 
