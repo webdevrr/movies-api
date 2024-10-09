@@ -56,4 +56,9 @@ describe('ListMoviesUseCase', () => {
     expect(result).toHaveLength(4);
     expect(result).toEqual(expect.arrayContaining([expect.objectContaining(expectedMovie)]));
   });
+
+  it('should return empty array if no movie found', async () => {
+    const result = await useCase.execute(1200, ['Action']);
+    expect(result).toEqual([]);
+  });
 });

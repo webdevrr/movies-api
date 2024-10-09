@@ -70,3 +70,17 @@ The API comes with built-in Swagger documentation, available at:
 ```
 http://localhost:<port>/api
 ```
+
+## Tests
+
+Run unit tests using the following command:
+
+```
+npm run test
+```
+
+Run e2e test using the following command:
+
+```
+npm run test:e2e
+```
