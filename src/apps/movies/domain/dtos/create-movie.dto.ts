@@ -1,4 +1,13 @@
-import { ArrayNotEmpty, IsNumber, IsOptional, IsString, Length, Validate } from 'class-validator';
+import {
+  ArrayNotEmpty,
+  IsNumber,
+  IsOptional,
+  IsString,
+  Length,
+  Min,
+  MinLength,
+  Validate
+} from 'class-validator';
 
 import { GenresValidator } from '../../utils/validators';
 
@@ -13,9 +22,11 @@ export class CreateMovieDto {
   readonly title: string;
 
   @IsNumber()
+  @Min(0)
   readonly year: number;
 
   @IsNumber()
+  @Min(0)
   readonly runtime: number;
 
   @IsString()
@@ -24,13 +35,16 @@ export class CreateMovieDto {
 
   @IsOptional()
   @IsString()
+  @MinLength(1)
   readonly actors?: string;
 
   @IsOptional()
   @IsString()
+  @MinLength(1)
   readonly plot?: string;
 
   @IsOptional()
   @IsString()
+  @MinLength(1)
   readonly posterUrl?: string;
 }
