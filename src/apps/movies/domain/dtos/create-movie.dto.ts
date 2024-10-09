@@ -1,9 +1,11 @@
-import { ArrayUnique, IsArray, IsNumber, IsOptional, IsString, Length } from 'class-validator';
+import { ArrayNotEmpty, IsNumber, IsOptional, IsString, Length, Validate } from 'class-validator';
+
+import { GenresValidator } from '../../utils/validators';
 
 export class CreateMovieDto {
-  @IsArray()
+  @ArrayNotEmpty()
   @IsString({ each: true })
-  @ArrayUnique()
+  @Validate(GenresValidator)
   readonly genres: string[];
 
   @IsString()

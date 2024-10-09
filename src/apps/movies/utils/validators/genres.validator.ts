@@ -12,9 +12,14 @@ export class GenresValidator implements ValidatorConstraintInterface {
     const availableGenres = await this.movieRepository.listGenres();
     let isValid: boolean;
 
+    if (!values) {
+      throw new BadRequestException('Genres not provided');
+    }
     if (typeof values === 'string') {
       isValid = availableGenres.includes(values);
-    } else {
+    }
+
+    if (Array.isArray(values)) {
       const hasDuplicates = new Set(values).size !== values.length;
       if (hasDuplicates) {
         throw new BadRequestException('Duplicate genres provided');

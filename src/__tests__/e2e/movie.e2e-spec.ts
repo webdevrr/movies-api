@@ -75,11 +75,76 @@ describe('MoviesController (e2e)', () => {
         .expect(400);
 
       expect(response.body).toEqual({
-        message: [
-          "All genres's elements must be unique",
-          'each value in genres must be a string',
-          'genres must be an array'
-        ],
+        message: 'Genres not provided',
+        error: 'Bad Request',
+        statusCode: 400
+      });
+      expect(createMovieUseCase.execute).not.toHaveBeenCalled();
+    });
+
+    it('should return 400 with proper message if genres are empty array', async () => {
+      const createMovieDto = {
+        title: 'Test Movie',
+        year: 2024,
+        genres: [],
+        director: 'test director',
+        runtime: 123
+      };
+      jest.spyOn(createMovieUseCase, 'execute');
+
+      const response = await request(app.getHttpServer())
+        .post('/api/v1/movies')
+        .send(createMovieDto)
+        .expect(400);
+
+      expect(response.body).toEqual({
+        message: ['genres should not be empty'],
+        error: 'Bad Request',
+        statusCode: 400
+      });
+      expect(createMovieUseCase.execute).not.toHaveBeenCalled();
+    });
+
+    it('should return 400 with proper message if genres are invalid', async () => {
+      const createMovieDto = {
+        title: 'Test Movie',
+        year: 2024,
+        director: 'test director',
+        genres: ['InvalidGenre'],
+        runtime: 123
+      };
+      jest.spyOn(createMovieUseCase, 'execute');
+
+      const response = await request(app.getHttpServer())
+        .post('/api/v1/movies')
+        .send(createMovieDto)
+        .expect(400);
+
+      expect(response.body).toEqual({
+        message: 'Invalid genres provided',
+        error: 'Bad Request',
+        statusCode: 400
+      });
+      expect(createMovieUseCase.execute).not.toHaveBeenCalled();
+    });
+
+    it('should return 400 with proper message if genres are duplicated', async () => {
+      const createMovieDto = {
+        title: 'Test Movie',
+        year: 2024,
+        director: 'test director',
+        genres: ['Action', 'Action'],
+        runtime: 123
+      };
+      jest.spyOn(createMovieUseCase, 'execute');
+
+      const response = await request(app.getHttpServer())
+        .post('/api/v1/movies')
+        .send(createMovieDto)
+        .expect(400);
+
+      expect(response.body).toEqual({
+        message: 'Duplicate genres provided',
         error: 'Bad Request',
         statusCode: 400
       });
