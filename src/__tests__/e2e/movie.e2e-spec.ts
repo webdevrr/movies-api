@@ -213,7 +213,10 @@ describe('MoviesController (e2e)', () => {
         .expect(400);
 
       expect(response.body).toEqual({
-        message: ['runtime must be a number conforming to the specified constraints'],
+        message: [
+          'runtime must not be less than 0',
+          'runtime must be a number conforming to the specified constraints'
+        ],
         error: 'Bad Request',
         statusCode: 400
       });
