@@ -1,6 +1,6 @@
 # Movies API
 
-The `movies-api` is a RESTful service that provides endpoints to manage a collection of movies. It supports basic CRUD (Create, Read, Update, Delete) operations. The API is containerized, and you can easily run it using Docker.
+The `movies-api` is a RESTful service that provides endpoints to manage a collection of movies. The API is containerized, and you can easily run it using Docker.
 
 ## Prerequisites
 
