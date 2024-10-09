@@ -234,5 +234,47 @@ describe('MoviesController (e2e)', () => {
 
       expect(listMoviesUseCase.execute).toHaveBeenCalledWith(duration, genres);
     });
+
+    it('should return an error if at least one genre is not valid', async () => {
+      const genres = ['Comedy', 'InvalidGenre'];
+      const duration = 120;
+      const moviesListDto: MoviesListDto = { genres, duration };
+
+      jest.spyOn(listMoviesUseCase, 'execute');
+
+      const response = await request(app.getHttpServer())
+        .get('/api/v1/movies')
+        .query(moviesListDto)
+        .expect(400);
+
+      expect(response.body).toEqual({
+        message: 'Invalid genres provided',
+        error: 'Bad Request',
+        statusCode: 400
+      });
+
+      expect(listMoviesUseCase.execute).not.toHaveBeenCalled();
+    });
+
+    it('should return an error if genres are duplicated', async () => {
+      const genres = ['Comedy', 'Comedy'];
+      const duration = 120;
+      const moviesListDto: MoviesListDto = { genres, duration };
+
+      jest.spyOn(listMoviesUseCase, 'execute');
+
+      const response = await request(app.getHttpServer())
+        .get('/api/v1/movies')
+        .query(moviesListDto)
+        .expect(400);
+
+      expect(response.body).toEqual({
+        message: 'Duplicate genres provided',
+        error: 'Bad Request',
+        statusCode: 400
+      });
+
+      expect(listMoviesUseCase.execute).not.toHaveBeenCalled();
+    });
   });
 });

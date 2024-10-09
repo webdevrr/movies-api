@@ -5,7 +5,7 @@ import { Cache } from 'cache-manager';
 import { MovieEntity } from '@/apps/movies/domain';
 import { Movie } from '@/apps/movies/types';
 import { FsService } from '@/frameworks/data/fs';
-import { Cache_key } from '@/shared/types';
+import { CacheKey } from '@/shared/types';
 
 import { MovieRepository } from '../movie.repository';
 import { FsMovieMapper } from './mapper';
@@ -23,14 +23,14 @@ export class FsMovieRepository implements MovieRepository {
 
   async list(): Promise<MovieEntity[]> {
     let movies: Movie[];
-    const cachedMovies: Movie[] = await this.cacheManager.get(Cache_key.movies);
+    const cachedMovies: Movie[] = await this.cacheManager.get(CacheKey.movies);
 
     if (!cachedMovies) {
       const data = await this.fsService.readFile<{ genres: string[]; movies: Movie[] }>(
         this.DATA_PATH
       );
       movies = data.movies;
-      this.cacheManager.set(Cache_key.movies, data.movies);
+      this.cacheManager.set(CacheKey.movies, data.movies);
     } else {
       movies = cachedMovies;
     }
@@ -52,21 +52,21 @@ export class FsMovieRepository implements MovieRepository {
 
     await this.fsService.writeFile(this.DATA_PATH, JSON.stringify(data));
 
-    this.cacheManager.del(Cache_key.movies);
+    this.cacheManager.del(CacheKey.movies);
 
     return entity.id;
   }
 
   async listGenres(): Promise<string[]> {
     let genres: string[];
-    const cachedGenres: string[] = await this.cacheManager.get(Cache_key.genres);
+    const cachedGenres: string[] = await this.cacheManager.get(CacheKey.genres);
 
     if (!cachedGenres) {
       const data = await this.fsService.readFile<{ genres: string[]; movies: Movie[] }>(
         this.DATA_PATH
       );
       genres = data.genres;
-      this.cacheManager.set(Cache_key.genres, data.genres);
+      this.cacheManager.set(CacheKey.genres, data.genres);
     } else {
       genres = cachedGenres;
     }

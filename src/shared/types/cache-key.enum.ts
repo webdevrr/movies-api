@@ -1,4 +1,4 @@
-export enum Cache_key {
+export enum CacheKey {
   movies = 'movies',
   genres = 'genres'
 }
