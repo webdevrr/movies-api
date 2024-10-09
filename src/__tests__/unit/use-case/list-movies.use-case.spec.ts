@@ -4,7 +4,7 @@ import { MovieRepository } from '@/apps/movies/data-access/repository';
 import { MovieDto } from '@/apps/movies/domain/dtos';
 import { ListMoviesUseCase } from '@/apps/movies/use-cases';
 
-import { MockMovieRepository } from './mocks';
+import { MockMovieRepository } from '../../mocks';
 
 const expectedMovie: MovieDto = {
   id: expect.any(Number),

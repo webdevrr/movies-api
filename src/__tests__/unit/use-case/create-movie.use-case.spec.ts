@@ -5,7 +5,7 @@ import { MovieEntity } from '@/apps/movies/domain';
 import { CreateMovieDto } from '@/apps/movies/domain/dtos';
 import { CreateMovieUseCase } from '@/apps/movies/use-cases';
 
-import { MockMovieRepository } from './mocks';
+import { MockMovieRepository } from '../../mocks';
 
 describe('CreateMovieUseCase', () => {
   let useCase: CreateMovieUseCase;

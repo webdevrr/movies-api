@@ -22,13 +22,13 @@ export class CreateMovieDto {
 
   @IsOptional()
   @IsString()
-  readonly actors: string;
+  readonly actors?: string;
 
   @IsOptional()
   @IsString()
-  readonly plot: string;
+  readonly plot?: string;
 
   @IsOptional()
   @IsString()
-  readonly posterUrl: string;
+  readonly posterUrl?: string;
 }

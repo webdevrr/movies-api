@@ -7,10 +7,10 @@ export class MoviesListDto {
   @IsOptional()
   @IsNumber()
   @Transform(({ value }) => parseFloat(value))
-  readonly duration: number;
+  readonly duration?: number;
 
   @IsOptional()
   @IsString({ each: true })
   @Validate(GenresValidator)
-  readonly genres: string[];
+  readonly genres?: string[];
 }
