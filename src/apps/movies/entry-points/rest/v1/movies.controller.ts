@@ -26,8 +26,19 @@ export class MoviesController {
   }
 
   @Get()
-  @ApiQuery({ name: 'duration', required: false, type: Number })
-  @ApiQuery({ name: 'genres', required: false, isArray: true, type: String })
+  @ApiQuery({
+    name: 'duration',
+    required: false,
+    type: Number,
+    description: 'The duration of the movies in minutes (searches in range based on this value)'
+  })
+  @ApiQuery({
+    name: 'genres',
+    required: false,
+    isArray: true,
+    type: String,
+    description: 'List of genres for the movie'
+  })
   @ApiOperation({ summary: 'List movies', description: ApiEndpointDescription.list_movies })
   @ApiResponse({
     status: 200,

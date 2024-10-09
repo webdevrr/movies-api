@@ -71,6 +71,41 @@ The API comes with built-in Swagger documentation, available at:
 http://localhost:<port>/api
 ```
 
+Example requests:
+
+- Create a new movie:
+
+```
+curl -X 'POST' \
+  'http://localhost:3000/api/v1/movies' \
+  -H 'accept: */*' \
+  -H 'Content-Type: application/json' \
+  -d '{
+  "genres": [
+    "Fantasy",
+    "Adventure"
+  ],
+  "title": "Harry Potter and the Philosophers Stone",
+  "year": 2001,
+  "runtime": 152,
+  "director": "Chris Columbus",
+  "actors": "Daniel Radcliffe, Rupert Grint, Emma Watson",
+  "plot": "An orphaned boy enrolls in a school of wizardry, where he learns the truth about himself, his family, and the evil force that haunts the magical world.",
+  "posterUrl": "https://example.com/harry_potter_poster.jpg"
+}'
+
+```
+
+- List movies:
+
+```
+curl -X 'GET' \
+  'http://localhost:3000/api/v1/movies?duration=100&genres=Fantasy&genres=Adventure' \
+  -H 'accept: application/json'
+```
+
+Duplicate genres query param to get movies that contain at least one of the specified genres.
+
 ## Tests
 
 Run unit tests using the following command:
