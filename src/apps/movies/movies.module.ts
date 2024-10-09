@@ -6,13 +6,15 @@ import { MovieRepository } from './data-access/repository';
 import { FsMovieRepository } from './data-access/repository/fs-movie-repository/fs-movie.repository';
 import { MoviesController } from './entry-points/rest/v1';
 import { CreateMovieUseCase, ListMoviesUseCase } from './use-cases';
+import { GenresValidator } from './utils/validators';
 
 @Module({
   controllers: [MoviesController],
   providers: [
     CreateMovieUseCase,
     ListMoviesUseCase,
-    { provide: MovieRepository, useClass: FsMovieRepository }
+    { provide: MovieRepository, useClass: FsMovieRepository },
+    GenresValidator
   ],
   imports: [FsModule]
 })

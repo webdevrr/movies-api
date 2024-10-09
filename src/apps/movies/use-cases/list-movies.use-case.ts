@@ -15,8 +15,8 @@ export class ListMoviesUseCase implements UseCase<MovieDto[] | []> {
     this.movieMapper = new MovieMapper();
   }
 
-  public async execute(duration?: number, genres?: string[]): Promise<MovieDto[] | []> {
-    const moviesData = await this.movieRepository.list(duration, genres);
+  public async execute(duration?: number, genres?: string[] | string): Promise<MovieDto[] | []> {
+    const moviesData = await this.movieRepository.list();
     let movies: MovieEntity[] | [];
 
     if (!duration && !genres) {
@@ -48,7 +48,7 @@ export class ListMoviesUseCase implements UseCase<MovieDto[] | []> {
     return movies.length === 0 ? [] : movies.map(this.movieMapper.toDto);
   }
 
-  private filterAndSortMoviesByGenres(movies: MovieEntity[], genres: string[]) {
+  private filterAndSortMoviesByGenres(movies: MovieEntity[], genres: string[] | string) {
     const filteredMovies = movies.filter(movie =>
       movie.genres.some(genre => genres.includes(genre))
     );

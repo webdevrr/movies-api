@@ -1,5 +1,7 @@
 import { Transform } from 'class-transformer';
-import { IsNumber, IsOptional, IsString } from 'class-validator';
+import { IsNumber, IsOptional, IsString, Validate } from 'class-validator';
+
+import { GenresValidator } from '../../utils/validators';
 
 export class MoviesListDto {
   @IsOptional()
@@ -9,5 +11,6 @@ export class MoviesListDto {
 
   @IsOptional()
   @IsString({ each: true })
+  @Validate(GenresValidator)
   readonly genres: string[];
 }
